@@ -12,10 +12,14 @@ EXPOSE 8000
 ARG DEV=false
 
 RUN pip install --upgrade pip && \
+    apk add --update --no-cache postgresql-client && \
+    apk add --no-cache --virtual .build-deps \
+        gcc musl-dev python3-dev postgresql-dev &&\
     pip install -r /tmp/requirements.txt && \
     if [ $DEV=="true" ]; \
         then pip install -r /tmp/requirements.dev.txt; \
     fi && \
+    apk del .build-deps && \
     rm -rf /tmp && \
     adduser \
     --disabled-password \
