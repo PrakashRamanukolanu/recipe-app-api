@@ -21,7 +21,6 @@ RUN pip install --upgrade pip && \
     fi && \
     apk del .build-deps && \
     rm -rf /tmp && \
-    chmod +x wait-for-db.sh && \
     adduser \
     --disabled-password \
     --no-create-home \
